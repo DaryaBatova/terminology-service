@@ -1,0 +1,315 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<h1 id="-api">Документация API</h1>
+  <h2 id="-handbooks">1. Ресурс Handbooks</h2>
+    <h3 id="-">1.1. Описание ресурса</h3>
+      <p>Содержит информацию о справочниках последних версий. Информация включает наименование, версию и дату
+      начала действия для каждого справочника.</p>
+    <h3 id="-">1.2. Конечная точка и методы</h3>
+      <pre><code>Endpoints
+
+      GET handbooks/
+
+      Получить список справочников последних версий.
+      </code></pre>
+  <h2 id="-handbooks_all_versions">2. Ресурс Handbooks_all_versions</h2>
+    <h3 id="-">2.1. Описание ресурса</h3>
+      <p>Содержит информацию о справочниках всевозможных версий. Информация включает наименование, версию и дату
+      начала действия для каждого справочника.</p>
+    <h3 id="-">2.2. Конечная точка и методы</h3>
+      <pre><code>Endpoints
+
+      GET handbook_all_versions/
+
+      Получить справочники всевозможных версий.
+      </code></pre>
+  <h2 id="-handbook_for_date">3. Ресурс Handbook_for_date</h2>
+    <h3 id="-">3.1. Описание ресурса</h3>
+      <p>Содержит информацию о справочниках, актуальных на определенную дату. Информация включает наименование, версию и дату
+      начала действия для каждого справочника.</p>
+    <h3 id="-">3.2. Конечная точка и методы</h3>
+      <pre><code>Endpoints
+
+      <span class="hljs-keyword">GET</span> handbook_for_date/{<span class="hljs-built_in">date</span>}
+
+      Получить справочники, актуальные на дату <span class="hljs-built_in">date</span>.
+      </code></pre>
+    <h3 id="-path">3.3. Параметры path</h3>
+      <pre><code>handbook_for_date/{<span class="hljs-built_in">date</span>}
+      </code></pre>
+      <table class="table">
+          <thead>
+            <tr>
+            <th>Параметр URL</th>
+            <th>Описание параметра</th>
+            </tr>
+          </thead>
+        <tbody>
+          <tr> <td>date</td> <td>Дата в формате &#39;YYYY-MM-DD&#39;</td> </tr>
+        </tbody>
+      </table>
+    <h3 id="-">3.4. Пример запроса</h3>
+      <p>GET-запрос: в качестве адреса должен быть указан URL в формате [base]/catalog/handbook-for_date/{date}. Например,</p>
+      <pre><code>[base]/catalog/handbook-for_date/<span class="hljs-number">2021</span><span class="hljs-number">-03</span><span class="hljs-number">-20</span>
+      </code></pre>
+    <h3 id="-">3.5. Пример и схема ответа</h3>
+      <p>В качестве ответа на запрос из примера будет получено:</p>
+      <pre><code>{
+          <span class="hljs-attr">"count"</span>: <span class="hljs-number">8</span>,
+          <span class="hljs-attr">"next"</span>: <span class="hljs-literal">null</span>,
+          <span class="hljs-attr">"previous"</span>: <span class="hljs-literal">null</span>,
+          <span class="hljs-attr">"results"</span>: [
+              {
+                  <span class="hljs-attr">"id"</span>: <span class="hljs-number">14</span>,
+                  <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Заболевания желудка"</span>,
+                  <span class="hljs-attr">"short_title"</span>: <span class="hljs-string">"Желудок"</span>,
+                  <span class="hljs-attr">"description"</span>: <span class="hljs-string">"Краткая информация о распространенных заболеваниях желудка."</span>,
+                  <span class="hljs-attr">"version"</span>: <span class="hljs-string">"1.2"</span>,
+                  <span class="hljs-attr">"date"</span>: <span class="hljs-string">"2021-03-19"</span>
+              },
+          ...
+      }
+      </code></pre><p>Общие параметры ответа:</p>
+      <table class="table">
+        <thead>
+            <tr>
+              <th> № </th>
+              <th> Параметр </th>
+              <th> Тип </th>
+              <th> Описание </th>
+            </tr>
+        </thead>
+            <tbody>
+              <tr> <td> 1. </td> <td> count </td> <td> id </td> <td> Количество элементов</td> </tr>
+              <tr> <td> 2. </td> <td> next </td> <td> string </td> <td> Ссылка на следующую страницу с данными </td> </tr>
+              <tr> <td> 3. </td> <td> previous </td> <td> string </td> <td> Ссылка на предыдущую страницу с данными </td> </tr>
+              <tr> <td> 4. </td> <td> results </td> <td> string </td> <td> Список возвращаемых элементов </td> </tr>
+            </tbody>
+      </table>
+
+      <p>Параметры <code>results</code>:</p>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>№</th>
+            <th>Параметр</th>
+            <th>Тип</th>
+            <th>Описание</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr> <td>1.</td> <td>id</td> <td>id</td> <td>Идентификатор справочника</td> </tr>
+          <tr> <td>2.</td> <td>title</td> <td>string</td> <td>Наименование справочника</td> </tr>
+          <tr> <td>3.</td> <td>short_title</td> <td>string</td> <td>Краткое наименование справочника</td> </tr>
+          <tr> <td>4.</td> <td>description</td> <td>string</td> <td>Описание справочника</td> </tr>
+          <tr> <td>5.</td> <td>version</td> <td>string</td> <td>Версия справочника</td> </tr>
+          <tr> <td>6.</td> <td>date</td> <td>datetime</td> <td>Дата начала действия справочника</td> </tr>
+        </tbody>
+      </table>
+  <h2 id="-elements">4. Ресурс Elements</h2>
+    <h3 id="-">4.1. Описание ресурса</h3>
+      <p>Содержит информацию об элементах определенного справочника. Информация включает код и значение для каждого элемента
+      справочника.</p>
+    <h3 id="-">4.2. Конечная точка и методы</h3>
+      <pre><code>Endpoints
+
+      GET elements/?handbook=<span class="hljs-built_in">id</span>
+
+      Получить элементы справочника с идентификатором, равным <span class="hljs-built_in">id</span>, текущей версии.
+
+      GET elements/?handbook=<span class="hljs-built_in">id</span>&amp;<span class="hljs-built_in">version</span>=value
+
+      Получить элементы справочника с идентификатором, равным <span class="hljs-built_in">id</span>, и версией, равной value.
+      </code></pre>
+    <h3 id="-">4.3. Параметры строки запроса</h3>
+      <table class="table">
+        <thead>
+          <tr>
+          <th>Параметр</th>
+          <th>Описание параметра</th>
+          <th>Формат параметра</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr> <td>handbook</td> <td>Идентификатор справочника</td> <td>Целое число</td> </tr>
+          <tr> <td>version</td> <td>Версия справочника</td> <td>Два целых числа, разделенных запятой</td> </tr>
+        </tbody>
+      </table>
+    <h3 id="-">4.4. Пример запроса</h3>
+      <p>GET-запрос: в качестве адреса должен быть указан URL в формате [base]/catalog/elements/?handbook=id или
+      [base]/catalog/elements/?handbook=id&amp;version=value. Например,</p>
+      <pre><code>[base]<span class="hljs-meta-keyword">/catalog/</span>elements/?handbook=<span class="hljs-number">5</span><span class="hljs-variable">&amp;version</span>=<span class="hljs-number">1.1</span>
+      </code></pre>
+    <h3 id="-">4.5. Пример и схема ответа</h3>
+      <p>В качестве ответа на запрос из примера будет получено:</p>
+      <pre><code>{
+          <span class="hljs-attr">"count"</span>: <span class="hljs-number">2</span>,
+          <span class="hljs-attr">"next"</span>: <span class="hljs-literal">null</span>,
+          <span class="hljs-attr">"previous"</span>: <span class="hljs-literal">null</span>,
+          <span class="hljs-attr">"results"</span>: [
+              {
+                  <span class="hljs-attr">"id"</span>: <span class="hljs-number">13</span>,
+                  <span class="hljs-attr">"code"</span>: <span class="hljs-string">"100-1"</span>,
+                  <span class="hljs-attr">"value"</span>: <span class="hljs-string">"Экзема"</span>
+              },
+              {
+                  <span class="hljs-attr">"id"</span>: <span class="hljs-number">14</span>,
+                  <span class="hljs-attr">"code"</span>: <span class="hljs-string">"100-2"</span>,
+                  <span class="hljs-attr">"value"</span>: <span class="hljs-string">"Чесотка"</span>
+              }
+          ]
+      }
+      </code></pre><p>Общие параметры ответа:</p>
+      <table class="table">
+        <thead>
+            <tr>
+              <th> № </th>
+              <th> Параметр </th>
+              <th> Тип </th>
+              <th> Описание </th>
+            </tr>
+        </thead>
+            <tbody>
+              <tr> <td> 1. </td> <td> count </td> <td> id </td> <td> Количество элементов</td> </tr>
+              <tr> <td> 2. </td> <td> next </td> <td> string </td> <td> Ссылка на следующую страницу с данными </td> </tr>
+              <tr> <td> 3. </td> <td> previous </td> <td> string </td> <td> Ссылка на предыдущую страницу с данными </td> </tr>
+              <tr> <td> 4. </td> <td> results </td> <td> string </td> <td> Список возвращаемых элементов </td> </tr>
+            </tbody>
+      </table>
+      <p>Параметры <code>results</code>:</p>
+      <table class="table">
+        <thead>
+            <tr>
+              <th> № </th>
+              <th> Параметр </th>
+              <th> Тип </th>
+              <th> Описание </th>
+            </tr>
+        </thead>
+            <tbody>
+              <tr> <td> 1. </td> <td> id </td> <td> id </td> <td> Идентификатор элемента </td> </tr>
+              <tr> <td> 2. </td> <td> code </td> <td> string </td> <td> Код элемента </td> </tr>
+              <tr> <td> 3. </td> <td> value </td> <td> string </td> <td> Значение элемента </td> </tr>
+            </tbody>
+      </table>
+      <p>В случае, если справочник с указанным идентификатором не найден, ответом на запрос будет являться сообщение следующего
+      вида:</p>
+      <pre><code>{
+          <span class="hljs-attr">"detail"</span>: <span class="hljs-string">"The requested handbook was not found."</span>
+      }
+      </code></pre>
+      <p>В случае, если формат передаваемых параметров не соответствует нужному шаблону, ответом на запрос будет являться
+      одно из сообщений:</p>
+      <pre><code>
+          <span class="hljs-comment">{
+            "detail": "Your request contain invalid handbook. You must specify the handbook identifier as an integer."
+        }</span>
+      </code></pre>
+      <pre><code><span class="hljs-comment">{
+          "detail": "Your request contain invalid handbook version. You must specify the handbook version as two integers separated a dot."
+      }</span>
+      </code></pre>
+  <h2 id="-elements_by_title">5. Ресурс Elements_by_title</h2>
+    <h3 id="-">5.1. Описание ресурса</h3>
+      <p>Содержит информацию об элементах определенного справочника. Информация включает код и значение для каждого элемента
+      справочника.</p>
+    <h3 id="-">5.2. Конечная точка и методы</h3>
+      <pre><code>Endpoints
+
+      GET elements<span class="hljs-number">_</span><span class="hljs-meta">by</span><span class="hljs-number">_</span>title/?handbook=title
+
+      Получить элементы справочника с наименованием title текущей версии.
+
+      GET elements<span class="hljs-number">_</span><span class="hljs-meta">by</span><span class="hljs-number">_</span>title/?handbook=title&amp;version=<span class="hljs-keyword">value</span>
+
+      Получить элементы справочника с наименованием title и версией, равной <span class="hljs-keyword">value</span>.
+      </code></pre>
+    <h3 id="-">5.3. Параметры строки запроса</h3>
+    <table class="table">
+      <thead>
+        <tr>
+        <th>Параметр</th>
+        <th>Описание параметра</th>
+        <th>Формат параметра</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr> <td>handbook</td> <td>Наименование справочника</td> <td>Строка</td> </tr>
+        <tr> <td>version</td> <td>Версия справочника</td> <td>Два целых числа, разделенных запятой</td> </tr>
+      </tbody>
+    </table>
+    <h3 id="-">5.4. Пример запроса</h3>
+      <p>GET-запрос: в качестве адреса должен быть указан URL в формате [base]/catalog/elements_by_title/?handbook=title или
+      [base]/catalog/elements_by_title/?handbook=title&amp;version=value. Например,</p>
+      <pre><code>[base]<span class="hljs-meta-keyword">/catalog/</span>elements_by_title/?handbook=Глазные%<span class="hljs-number">20</span>заболевания<span class="hljs-variable">&amp;version</span>=<span class="hljs-number">1.2</span>
+      </code></pre>
+    <h3 id="-">5.5. Пример и схема ответа</h3>
+      <p>В качестве ответа на запрос из примера будет получено:</p>
+      <pre><code>{
+          <span class="hljs-attr">"count"</span>: <span class="hljs-number">2</span>,
+          <span class="hljs-attr">"next"</span>: <span class="hljs-literal">null</span>,
+          <span class="hljs-attr">"previous"</span>: <span class="hljs-literal">null</span>,
+          <span class="hljs-attr">"results"</span>: [
+              {
+                  <span class="hljs-attr">"id"</span>: <span class="hljs-number">22</span>,
+                  <span class="hljs-attr">"code"</span>: <span class="hljs-string">"101-1"</span>,
+                  <span class="hljs-attr">"value"</span>: <span class="hljs-string">"Халязион"</span>
+              },
+              {
+                  <span class="hljs-attr">"id"</span>: <span class="hljs-number">29</span>,
+                  <span class="hljs-attr">"code"</span>: <span class="hljs-string">"101-2"</span>,
+                  <span class="hljs-attr">"value"</span>: <span class="hljs-string">"Катаракта"</span>
+              }
+          ]
+      }
+      </code></pre><p>Общие параметры ответа:</p>
+      <table class="table">
+        <thead>
+            <tr>
+              <th> № </th>
+              <th> Параметр </th>
+              <th> Тип </th>
+              <th> Описание </th>
+            </tr>
+        </thead>
+            <tbody>
+              <tr> <td> 1. </td> <td> count </td> <td> id </td> <td> Количество элементов</td> </tr>
+              <tr> <td> 2. </td> <td> next </td> <td> string </td> <td> Ссылка на следующую страницу с данными </td> </tr>
+              <tr> <td> 3. </td> <td> previous </td> <td> string </td> <td> Ссылка на предыдущую страницу с данными </td> </tr>
+              <tr> <td> 4. </td> <td> results </td> <td> string </td> <td> Список возвращаемых элементов </td> </tr>
+            </tbody>
+      </table>
+      <p>Параметры <code>results</code>:</p>
+      <table class="table">
+        <thead>
+            <tr>
+              <th> № </th>
+              <th> Параметр </th>
+              <th> Тип </th>
+              <th> Описание </th>
+            </tr>
+        </thead>
+            <tbody>
+              <tr> <td> 1. </td> <td> id </td> <td> id </td> <td> Идентификатор элемента </td> </tr>
+              <tr> <td> 2. </td> <td> code </td> <td> string </td> <td> Код элемента </td> </tr>
+              <tr> <td> 3. </td> <td> value </td> <td> string </td> <td> Значение элемента </td> </tr>
+            </tbody>
+      </table>
+
+      <p>В случае, если справочник с указанным идентификатором не найден, ответом на запрос будет являться сообщение следующего
+      вида:</p>
+      <pre><code>{
+          <span class="hljs-attr">"detail"</span>: <span class="hljs-string">"The requested handbook was not found."</span>
+      }
+      </code></pre><p>В случае, если формат передаваемых параметров не соответствует нужному шаблону, ответом на запрос будет являться
+      одно из сообщений:</p>
+      <pre><code><span class="hljs-comment">{
+          "detail": "Your request contain invalid handbook. You must specify the handbook identifier as an integer."
+      }</span>
+      </code></pre><pre><code><span class="hljs-comment">{
+          "detail": "Your request contain invalid handbook version. You must specify the handbook version as two integers separated a dot."
+      }</span>
+      </code></pre>
+
+{% endblock %}

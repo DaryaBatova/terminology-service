@@ -1,0 +1,19 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>Список справочников всех версий</h1>
+
+    {% if handbookversion_list %}
+    <ul>
+
+      {% for handbook in handbookversion_list %}
+      <li>
+        <a href="{{ handbook.get_absolute_url }}">{{ handbook.handbook }}</a> ({{handbook.version}})
+      </li>
+      {% endfor %}
+
+    </ul>
+    {% else %}
+      <p>В базе данных нет справочников.</p>
+    {% endif %}
+{% endblock %}

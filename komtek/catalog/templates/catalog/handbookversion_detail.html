@@ -1,0 +1,9 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Справочник: {{ handbookversion.handbook }}</h1>
+
+  <p><strong>Версия:</strong> {{ handbookversion.version }}</p>
+  <p><strong>Дата начала действия справочника этой версии:</strong> {{ handbookversion.date }}</p>
+
+{% endblock %}
